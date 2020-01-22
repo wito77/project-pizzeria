@@ -82,24 +82,23 @@
       /* START: click event listener to trigger */
       clickableTrigger.addEventListener('click', function (event) {
         event.preventDefault();
-      });
-      /* prevent default action for event */
-
-      /* toggle active class on element of thisProduct */
-      thisProduct.element.classList.toggle('active');
-      /* find all active products */
-      const allActiveProducts = document.querySelectorAll('active');
-      /* START LOOP: for each active product */
-      for (let activeProduct of allActiveProducts) {
-        /* START: if the active product isn't the element of thisProduct */
-        if (activeProduct != thisProduct.element) {
-          /* remove class active for the active product */
-          activeProduct.classList.remove('active');
-          /* END: if the active product isn't the element of thisProduct */
+        /* prevent default action for event */
+        /* toggle active class on element of thisProduct */
+        thisProduct.element.classList.toggle('active');
+        /* find all active products */
+        const allActiveProducts = document.querySelectorAll('active');
+        /* START LOOP: for each active product */
+        for (let activeProduct of allActiveProducts) {
+          /* START: if the active product isn't the element of thisProduct */
+          if (activeProduct != thisProduct.element) {
+            /* remove class active for the active product */
+            activeProduct.classList.remove('active');
+            /* END: if the active product isn't the element of thisProduct */
+          }
+          /* END LOOP: for each active product */
         }
-        /* END LOOP: for each active product */
-      }
-      /* END: click event listener to trigger */
+        /* END: click event listener to trigger */
+      });
     }
   }
 
