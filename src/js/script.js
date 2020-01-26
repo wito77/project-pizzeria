@@ -6,6 +6,7 @@
   const select = {
     templateOf: {
       menuProduct: '#template-menu-product',
+      cartProduct: '#template-cart-product', // CODE ADDED
     },
     containerOf: {
       menu: '#product-list',
@@ -31,6 +32,26 @@
         linkIncrease: 'a[href="#more"]',
       },
     },
+    // CODE ADDED START
+    cart: {
+      productList: '.cart__order-summary',
+      toggleTrigger: '.cart__summary',
+      totalNumber: `.cart__total-number`,
+      totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
+      subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
+      deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
+      form: '.cart__order',
+      formSubmit: '.cart__order [type="submit"]',
+      phone: '[name="phone"]',
+      address: '[name="address"]',
+    },
+    cartProduct: {
+      amountWidget: '.widget-amount',
+      price: '.cart__product-price',
+      edit: '[href="#edit"]',
+      remove: '[href="#remove"]',
+    },
+    // CODE ADDED END
   };
 
   const classNames = {
@@ -38,6 +59,11 @@
       wrapperActive: 'active',
       imageVisible: 'active',
     },
+    // CODE ADDED START
+    cart: {
+      wrapperActive: 'active',
+    },
+    // CODE ADDED END
   };
 
   const settings = {
@@ -45,11 +71,19 @@
       defaultValue: 1,
       defaultMin: 1,
       defaultMax: 9,
-    }
+    }, // CODE CHANGED
+    // CODE ADDED START
+    cart: {
+      defaultDeliveryFee: 20,
+    },
+    // CODE ADDED END
   };
 
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
+    // CODE ADDED START
+    cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
+    // CODE ADDED END
   };
 
   class Product {
@@ -63,7 +97,7 @@
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      console.log('new Product:', thisProduct);
+      // console.log('new Product:', thisProduct);
     }
     renderInMenu() {
       const thisProduct = this;
@@ -117,7 +151,7 @@
     }
     initOrderForm() {
       const thisProduct = this;
-      console.log(thisProduct);
+      // console.log(thisProduct);
       thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
@@ -145,25 +179,25 @@
     }
     processOrder() {
       const thisProduct = this;
-      console.log(thisProduct);
+      // console.log(thisProduct);
       /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
+      // console.log('formData', formData);
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
       /* START LOOP: for each paramId in thisProduct.data.params */
       for (let paramId in thisProduct.data.params) {
         /* save the element in thisProduct.data.params with key paramId as const param */
         const param = thisProduct.data.params[paramId];
-        console.log(param);
+        // console.log(param);
         /* START LOOP: for each optionId in param.options */
         for (let optionId in param.options) {
           /* save the element in param.options with key optionId as const option */
           const option = param.options[optionId];
-          console.log(option);
+          // console.log(option);
           /* START IF: if option is selected and option is not default */
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
-          console.log(optionSelected);
+          // console.log(optionSelected);
           if (optionSelected && !option.default) {
             /* add price of option to variable price */
             price = price + option.price;
@@ -207,8 +241,8 @@
       thisWidget.value = settings.amountWidget.defaultValue;
       thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions();
-      console.log('AmountWidget:', thisWidget);
-      console.log('constructor arguments:', element);
+      // console.log('AmountWidget:', thisWidget);
+      // console.log('constructor arguments:', element);
     }
 
     getElements(element) {
@@ -232,7 +266,7 @@
       }
 
       thisWidget.input.value = thisWidget.value;
-      console.log(thisWidget.value);
+      // console.log(thisWidget.value);
     }
 
     initActions() {
@@ -260,7 +294,7 @@
   const app = {
     initMenu: function () {
       const thisApp = this;
-      console.log('thisApp.data:', thisApp.data);
+      // console.log('thisApp.data:', thisApp.data);
 
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
