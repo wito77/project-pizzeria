@@ -247,8 +247,9 @@
     }
     addToCart() {
       const thisProduct = this;
-      thisProduct.data.name = thisProduct.name;
-      thisProduct.amountWidget.value = thisProduct.amount;
+      thisProduct.name = thisProduct.data.name;
+      console.log(thisProduct.name);
+      thisProduct.amount = thisProduct.amountWidget.value;
       app.cart.add(thisProduct);
     }
   }
@@ -350,10 +351,8 @@
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       // console.log('generatedDOM', generatedDOM);
       /* add DOM elements to... */
-
       const cartContainer = thisCart.dom.productList;
       // thisCart.dom.productList(generatedDOM);
-
       cartContainer.appendChild(generatedDOM);
 
     }
