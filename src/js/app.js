@@ -52,9 +52,10 @@ const app = {
     const thisApp = this;
     thisApp.pages = Array.from(document.querySelector(select.containerOf.pages).children);
     thisApp.navLinks = Array.from(document.querySelectorAll(select.nav.links));
+    thisApp.imageBoxes = Array.from(document.querySelectorAll('.navi a'));
 
     let pagesMatchingHash = [];
-    if (window.location.hash.lenght > 2) {
+    if (window.location.hash.length > 2) {
       const idFromHash = window.location.hash.replace('#/', '');
 
       pagesMatchingHash = thisApp.pages.filter(function (page) {
@@ -77,6 +78,14 @@ const app = {
       });
     }
 
+    for (let box of thisApp.imageBoxes) {
+      box.addEventListener('click', function (event) {
+        const clickedElement = this;
+        event.preventDefault();
+        const id = clickedElement.getAttribute('href').replace('#', '');
+        thisApp.activatePage(id);
+      });
+    }
   },
 
   activatePage: function (pageId) {
@@ -98,6 +107,24 @@ const app = {
     thisApp.booking = new Booking(thisApp.bookingContainer);
   },
 
+  // initCarousel: function () {
+  //   const carouselSlide = document.querySelector('.opinion');
+  //   const carouselBoxes = document.querySelectorAll('.slide');
+
+  //   const dot1 = document.querySelector('#dot1');
+  //   const dot2 = document.querySelector('#dot2');
+  //   const dot3 = document.querySelector('#dot3');
+
+  //   let counter = 1;
+  //   const size = carouselBoxes[0].clientWidth;
+
+  //   carouselSlide.getElementsByClassName.transform = 'translateX(' + (size * counter) + 'px)';
+
+  //   dot2.addEventListener('click', function () {
+  //     carouselSlide.style.transition = 'transform 0.4s linear';
+  //   });
+  // },
+
   init: function () {
     const thisApp = this;
     // console.log('*** App starting ***');
@@ -110,6 +137,7 @@ const app = {
     thisApp.initCart();
     thisApp.initPages();
     thisApp.initBooking();
+    // thisApp.initCarousel();
   },
 };
 
