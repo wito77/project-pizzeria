@@ -51,19 +51,21 @@ const app = {
   initPages: function () {
     const thisApp = this;
     thisApp.pages = Array.from(document.querySelector(select.containerOf.pages).children);
+    console.log(thisApp.pages);
     thisApp.navLinks = Array.from(document.querySelectorAll(select.nav.links));
     thisApp.imageBoxes = Array.from(document.querySelectorAll('.navi a'));
 
     let pagesMatchingHash = [];
+
     if (window.location.hash.length > 2) {
       const idFromHash = window.location.hash.replace('#/', '');
 
       pagesMatchingHash = thisApp.pages.filter(function (page) {
         return page.id == idFromHash;
       });
-      thisApp.activatePage(pagesMatchingHash.length ? pagesMatchingHash[0].id : thisApp.pages[0].id);
     }
 
+    thisApp.activatePage(pagesMatchingHash.length ? pagesMatchingHash[0].id : thisApp.pages[0].id);
 
     for (let link of thisApp.navLinks) {
       link.addEventListener('click', function (event) {
@@ -98,6 +100,7 @@ const app = {
       page.classList.toggle(classNames.nav.active, page.getAttribute('id') == pageId);
     }
     window.location.hash = '#/' + pageId;
+    document.body.classList = pageId;
   },
 
   initBooking: function () {
