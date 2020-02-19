@@ -110,23 +110,63 @@ const app = {
     thisApp.booking = new Booking(thisApp.bookingContainer);
   },
 
-  // initCarousel: function () {
-  //   const carouselSlide = document.querySelector('.opinion');
-  //   const carouselBoxes = document.querySelectorAll('.slide');
+  initCarousel: function () {
+    /* global Mustache */
 
-  //   const dot1 = document.querySelector('#dot1');
-  //   const dot2 = document.querySelector('#dot2');
-  //   const dot3 = document.querySelector('#dot3');
+    const appContainer = document.querySelector('#carousel');
+    const template = document.querySelector('#template_carousel').innerHTML;
+    let id = 0;
 
-  //   let counter = 1;
-  //   const size = carouselBoxes[0].clientWidth;
+    const data = {
+      carousel: [
+        {
+          title: 'AMAZING SERVICE!',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.',
+          author: '- Margaret Osborne'
+        },
+        {
+          title: 'Not neapolitan pizza, but still good',
+          content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum vero ipsam magni blanditiis laudantium porro, natus aliquid necessitatibus beatae deleniti.',
+          author: '- Ozzy Osborne'
+        },
+        {
+          title: 'Very tasty.',
+          content: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur quia ab, vero nam magnam velit molestias quos amet quidem quaerat rem alias a. Id quam, cupiditate praesentium maxime tempora facere?',
+          author: '- Pizza Lover'
+        }
+      ],
+      idx: () => id++
+    };
 
-  //   carouselSlide.getElementsByClassName.transform = 'translateX(' + (size * counter) + 'px)';
+    const outputHTML = Mustache.render(template, data);
+    appContainer.innerHTML = outputHTML;
 
-  //   dot2.addEventListener('click', function () {
-  //     carouselSlide.style.transition = 'transform 0.4s linear';
-  //   });
-  // },
+    const items = document.querySelectorAll('.slide');
+    const links = document.querySelectorAll('.carousel-dots-item');
+
+    items[0].classList.add('active');
+    links[0].classList.add('active');
+
+    console.log(links);
+
+    for (let link of links) {
+      link.addEventListener('click', e => {
+        const element = e.currentTarget;
+        const index = element.getAttribute('data-index');
+
+        for (let item of items) {
+          item.classList.remove('active');
+        }
+
+        for (let l of links) {
+          l.classList.remove('active');
+        }
+
+        items[index].classList.add('active');
+        element.classList.add('active');
+      });
+    }
+  },
 
   init: function () {
     const thisApp = this;
@@ -140,7 +180,7 @@ const app = {
     thisApp.initCart();
     thisApp.initPages();
     thisApp.initBooking();
-    // thisApp.initCarousel();
+    thisApp.initCarousel();
   },
 };
 

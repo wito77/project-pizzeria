@@ -90,8 +90,8 @@
                   </a>
             </div>
           </div>
-          <div class="carousel">
-            <div class="carousel-wrapper">
+          <div id="carousel">
+            <!-- <div class="carousel-wrapper">
               <div class="carousel-box">
                 <img alt="people eating pizza" src='images/assets/pizza-3.jpg' />
               </div>
@@ -132,7 +132,7 @@
               <i id="dot1" class="fas fa-circle"></i>
               <i id="dot2" class="fas fa-circle"></i>
               <i id="dot3" class="fas fa-circle"></i>
-            </div>
+            </div> -->
           </div>
           <div class="gallery">
             <div class="gallery-wrapper">
@@ -365,6 +365,31 @@
     </article> <!-- .product -->
   </script>
 
+  <script id="template_carousel" type="x-tmpl-mustache">
+    <div class="carousel">
+      <div class="carousel-wrapper">
+        <div class="carousel-image">
+          <img alt="people eating pizza" src='images/assets/pizza-3.jpg' />
+        </div>
+        <div class="carousel-container">
+          {{#carousel}}
+            <div class="slide">
+              <h4>{{ title }}</h4>
+              <p>{{ content }}</p>
+              <p class="author">{{ author }}</p>
+            </div>
+          {{/carousel}}
+        </div>
+      </div>
+      <ul class="carousel-dots">
+        {{#carousel}}
+          <li class="carousel-dots-item" data-index="{{ idx }}"></li>
+        {{/carousel}}
+      </ul>
+    </div>
+  </script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.0/mustache.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="vendor/range-slider.min.js"></script>
