@@ -2,11 +2,18 @@
   margin-top: 282px;
   // background-color: #fff;
 }
-// .container {
-// }
 
 .main-nav {
   display: none!important;
+}
+
+.logo a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.logo__title span {
+  font-weight: 500;
 }
 
 .home-all-wrapper {
@@ -16,7 +23,6 @@
   border-bottom: 1px solid #e6e6e6;
   border-radius: 5px;
   margin-top: 282px;
-  color: $color-dark;
 }
 
 .home-wrapper {

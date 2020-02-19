@@ -21,14 +21,14 @@
 
   &__title {
     margin: 0 0 $base-size 0;
-    font-size: ($base-size * 4);
+    font-size: ($base-size * 3.5);
     font-family: $font-header;
     font-weight: $font-light;
     text-transform: uppercase;
 
-    span {
-      font-weight: $font-bold;
-    }
+    // span {
+    //   font-weight: $font-bold;
+    // }
 
   }
 

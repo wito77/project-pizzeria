@@ -1,3 +1,15 @@
+body {
+  &:not(.order) {
+    .cart {
+      display: none;
+    }
+  }
+}
+
+.cart {
+  display: block;
+}
+
 .cart {
   position: absolute;
   width: 300px; // CODE CHANGED
@@ -153,7 +165,5 @@
       width: 100%;
       margin-bottom: ($base-size / 2);
     }
-
   }
-
 }
